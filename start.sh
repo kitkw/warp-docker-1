@@ -16,8 +16,7 @@ if docker ps -a | grep -iE "${container_name}" > /dev/null 2>&1; then
     docker container rm -f "${container_name}" > /dev/null 2>&1
 fi
 if ! docker image ls | grep -iE "$img_name" > /dev/null 2>&1; then
-    echo "Using ./build_img.sh to build docker image first before execute this script!"
-    exit 1
+    "${ROOT}/build_img.sh"
 fi
 
 docker run --restart=always \
