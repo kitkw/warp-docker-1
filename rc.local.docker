@@ -3,5 +3,6 @@
 
 modprobe wireguard
 wg-quick up wgcf0
+v2ray --config=/etc/v2ray/config.json
 
 sleep infinity

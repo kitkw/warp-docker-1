@@ -7,6 +7,7 @@ RUN apk add --no-cache \
         ca-certificates \
         curl \
         tzdata \
+        v2ray \
         wireguard-tools \
     && cp /usr/share/zoneinfo/Asia/Taipei /etc/localtime \
     && apk del tzdata

@@ -45,10 +45,11 @@ fi
 docker run --restart=always \
     --name "${container_name}" \
     -itd \
-    -p 30022:22 \
+    -p 2080:2080 \
     --privileged \
     --sysctl net.ipv6.conf.all.disable_ipv6=0 \
     --cap-add net_admin --cap-add sys_module \
+    -v "${ROOT}/v2ray/config.json":/etc/v2ray/config.json \
     -v "${ROOT}/rc.local.docker":/etc/rc.local.docker \
     -v "${ROOT}/wireguard":/etc/wireguard \
     -v /lib/modules:/lib/modules \
