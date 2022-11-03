@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+modprobe wireguard
+wg-quick up wgcf0
+
+sleep infinity
