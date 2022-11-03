@@ -1,19 +1,15 @@
-FROM ubuntu:22.04
+FROM alpine:latest
 
-ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Taipei
 
-RUN apt-get update && apt-get install -y \
+RUN apk add --no-cache \
+        bash \
         ca-certificates \
         curl \
-        iproute2 \
-        iputils-ping \
-        lrzsz \
-        net-tools \
-        openresolv \
         tzdata \
-        vim \
-        wireguard-tools
+        wireguard-tools \
+    && cp /usr/share/zoneinfo/Asia/Taipei /etc/localtime \
+    && apk del tzdata
 
 COPY rc.local.docker /etc/rc.local.docker
 
