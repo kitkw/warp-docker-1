@@ -8,6 +8,26 @@ ROOT="$(pwd)"
 . "${ROOT}/configs.sh"
 
 
+force_build_image='0'
+#########################
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    case ${key} in
+        --build|-b)
+        force_build_image='1'
+        shift # past argument
+        ;;
+        *)
+        UNKNOWN_OPTION='1'
+        UNKNOWN_OPTION_VALUE="$key"
+                # unknown option
+        ;;
+    esac
+    shift # past argument or value
+done
+###############################
+
+
 if ! docker -v; then
     echo "Please install docker first before execute this script!"
     exit 0
@@ -15,9 +35,12 @@ fi
 if docker ps -a | grep -iE "${container_name}" > /dev/null 2>&1; then
     docker container rm -f "${container_name}" > /dev/null 2>&1
 fi
-if ! docker image ls | grep -iE "$img_name" > /dev/null 2>&1; then
+if [[ "${force_build_image}" == '1' ]]; then
+    "${ROOT}/build_img.sh"
+elif ! docker image ls | grep -iE "$img_name" > /dev/null 2>&1; then
     "${ROOT}/build_img.sh"
 fi
+
 
 docker run --restart=always \
     --name "${container_name}" \
