@@ -9,7 +9,7 @@ RUN apk add --no-cache \
         tzdata \
         v2ray \
         wireguard-tools \
-        proute2 \
+        iproute2 \
         openresolv \
     && cp /usr/share/zoneinfo/Asia/Taipei /etc/localtime \
     && apk del tzdata
